@@ -1,0 +1,66 @@
+Eres mi copiloto de desarrollo. Vamos a crear un software financiero llamado MONETIX, cuyo propósito es ayudar a la gente común a entender y anticipar cómo los eventos financieros impactan en su vida diaria.  
+
+### Objetivo del producto
+Centralizar en un solo panel:
+- Datos de mercados globales (acciones, ETFs, divisas, criptos).
+- Datos de economía local (inflación, tipo de cambio oficial y paralelo, tasas bancarias).
+- Noticias financieras resumidas en lenguaje simple.
+- Calendario de eventos financieros importantes (anuncios de bancos centrales, earnings de grandes empresas).
+- Un **mensaje financiero del día**: cada día el usuario recibe un consejo, estadística o insight breve, presentado como pop-up/notificación en la app. Este mensaje debe poder **compartirse fácilmente en redes sociales o con otros usuarios**, generando viralidad y marketing orgánico.
+
+> De que API sacar los datos??
+  > Dejar que cursor sugiera o le pasamos sugerencias?
+
+### Requerimientos iniciales (MVP)
+1. **Frontend** (web app en React con Tailwind):
+   - Dashboard tipo tarjetas (cards) mostrando:
+     - Inflación local del último mes.
+     - Precio del dólar oficial y paralelo.
+     - 5 activos seleccionados (ejemplo: AAPL, BTC, S&P500, ETH, oro).
+     - Una tarjeta de “Noticias financieras resumidas”.
+     - Una tarjeta fija para el **mensaje financiero del día**.
+   - Posibilidad de personalizar la watchlist (CRUD simple).
+   - Botón de “Compartir” en el mensaje financiero.
+
+2. **Backend** (Node.js/Express o Python/FastAPI):
+   - Conexión a APIs públicas:
+     - Yahoo Finance o Alpha Vantage (acciones/ETFs).
+     - CoinGecko (cripto).
+     - API de tasas de cambio (ej: exchangerate.host).
+     - Datos locales dummy (ejemplo: inflación mensual mockeada en JSON).
+   - Endpoint REST/GraphQL para servir datos normalizados al frontend.
+   - Endpoint especial `/daily-message` que entrega el mensaje financiero del día (inicialmente hardcoded, luego dinámico con IA o base de frases).
+
+3. **Motor de traducción a impacto** (reglas simples para MVP):
+   - Inflación ↑ → “Tus gastos mensuales podrían subir X%”.
+   - Dólar ↑ → “Viajar o importar productos costará más caro”.
+   - Activo en alza/baja >5% → “Movimiento fuerte que puede impactar fondos de inversión”.
+
+4. **Noticias resumidas**:
+   - Scraping de un feed de noticias financieras (ejemplo: RSS de Yahoo Finance).
+   - Resumen automático con un modelo de IA (ejemplo: OpenAI API).
+
+5. **Infraestructura mínima**:
+   - DB (Postgres o Mongo) para almacenar configuraciones de usuario y favoritos.
+   - Scheduler para refrescar datos (cada 15 min).
+   - Logging básico y manejo de errores.
+
+### Monetización
+- **Versión gratuita**: incluye anuncios y permite compartir el “mensaje del día” (motor de marketing viral).
+- **Versión full/premium**: sin anuncios, más personalización y reportes de impacto detallados.
+
+### Estilo
+- Código limpio, modular, documentado.
+- Arquitectura escalable para luego integrar alertas, calendarios y analítica.
+- Diseñado para poder crecer a modelo freemium.
+
+### Primera tarea
+Prototipa la **estructura base del proyecto** con:
+- Frontend en React + Tailwind con layout de dashboard y tarjetas dummy.
+- Backend con endpoints mockeados para:
+  - `/inflation`
+  - `/exchange-rate`
+  - `/assets`
+  - `/news`
+  - `/daily-message`
+- Simular respuesta de cada endpoint con datos falsos para empezar.
